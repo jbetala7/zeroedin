@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { CrosshairIcon } from '@/components/ui/CrosshairIcon';
 
 interface PreloaderProps {
   onComplete: () => void;
@@ -11,7 +12,7 @@ export function RifleScopeLoader({ onComplete }: PreloaderProps) {
   const [phase, setPhase] = useState<'focusing' | 'locked'>('focusing');
 
   useEffect(() => {
-    const duration = 2500; // 2.5 seconds total
+    const duration = 1500; // 2.5 seconds total
     const startTime = Date.now();
 
     const animate = () => {
@@ -21,7 +22,7 @@ export function RifleScopeLoader({ onComplete }: PreloaderProps) {
 
       if (newProgress >= 100) {
         setPhase('locked');
-        setTimeout(onComplete, 600);
+        setTimeout(onComplete, 1000); 
       } else {
         requestAnimationFrame(animate);
       }
@@ -110,35 +111,7 @@ export function RifleScopeLoader({ onComplete }: PreloaderProps) {
         className="absolute inset-0 flex items-center justify-center pointer-events-none"
         style={{ opacity: crosshairOpacity }}
       >
-        <svg width="120" height="120" viewBox="0 0 120 120">
-          {/* Outer circle */}
-          <circle
-            cx="60"
-            cy="60"
-            r="50"
-            fill="none"
-            stroke="#ef4444"
-            strokeWidth="2"
-            style={{
-              filter: 'drop-shadow(0 0 10px rgba(255, 60, 60, 0.8))',
-            }}
-          />
-          {/* Cross lines */}
-          <line x1="20" y1="60" x2="45" y2="60" stroke="#ef4444" strokeWidth="2" />
-          <line x1="75" y1="60" x2="100" y2="60" stroke="#ef4444" strokeWidth="2" />
-          <line x1="60" y1="20" x2="60" y2="45" stroke="#ef4444" strokeWidth="2" />
-          <line x1="60" y1="75" x2="60" y2="100" stroke="#ef4444" strokeWidth="2" />
-          {/* Center dot */}
-          <circle
-            cx="60"
-            cy="60"
-            r="3"
-            fill="#ef4444"
-            style={{
-              filter: 'drop-shadow(0 0 5px rgba(255, 60, 60, 1))',
-            }}
-          />
-        </svg>
+        <CrosshairIcon size={120} withGlow={false} />
       </div>
 
       {/* Distance readout */}
@@ -171,24 +144,6 @@ export function RifleScopeLoader({ onComplete }: PreloaderProps) {
           {phase === 'locked' ? 'TARGET ACQUIRED' : 'ZEROING IN...'}
         </div>
 
-        {/* Progress bar */}
-        <div
-          className="mt-4 h-1 w-48 mx-auto rounded-full overflow-hidden"
-          style={{ background: 'rgba(100, 20, 20, 0.5)' }}
-        >
-          <div
-            className="h-full rounded-full transition-all duration-100"
-            style={{
-              width: `${progress}%`,
-              background: phase === 'locked'
-                ? 'linear-gradient(90deg, #22c55e, #4ade80)'
-                : 'linear-gradient(90deg, #dc2626, #ef4444)',
-              boxShadow: phase === 'locked'
-                ? '0 0 10px rgba(50, 255, 100, 0.8)'
-                : '0 0 10px rgba(255, 50, 50, 0.8)',
-            }}
-          />
-        </div>
       </div>
 
       {/* Scope edge ring */}

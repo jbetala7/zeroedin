@@ -13,7 +13,7 @@ export function CrosshairIcon({ size = 60, className = '', withGlow = true }: Cr
       height={size}
       viewBox="0 0 60 60"
       className={className}
-      style={withGlow ? { filter: 'drop-shadow(0 0 15px rgba(255, 60, 60, 1)) drop-shadow(0 0 30px rgba(255, 40, 40, 0.8))' } : undefined}
+      style={withGlow ? { filter: 'drop-shadow(rgb(255, 60, 60) 0px 0px 2px) drop-shadow(rgba(255, 40, 40, 0.8) 0px 0px 0px)' } : undefined}
     >
       {/* Outer circle */}
       <circle

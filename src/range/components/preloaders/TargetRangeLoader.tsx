@@ -97,16 +97,6 @@ export function TargetRangeLoader({ onComplete }: PreloaderProps) {
         </div>
       </div>
 
-      {/* Range floor */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-32"
-        style={{
-          background: 'linear-gradient(180deg, transparent 0%, rgba(40, 20, 10, 0.5) 50%, rgba(30, 15, 8, 0.8) 100%)',
-        }}
-      >
-        {/* Lane markings */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-2 h-24 bg-yellow-500/30" />
-      </div>
 
       {/* Target slides from left to center */}
       <div
@@ -192,6 +182,7 @@ export function TargetRangeLoader({ onComplete }: PreloaderProps) {
               : 'border-[#333] bg-[#1a1a1a]'
           }`}
           style={{
+            padding: '5px',
             boxShadow: rangeHot ? '0 0 30px rgba(255, 50, 50, 0.6), inset 0 0 20px rgba(255, 50, 50, 0.2)' : 'none',
           }}
         >
@@ -220,26 +211,6 @@ export function TargetRangeLoader({ onComplete }: PreloaderProps) {
         </div>
       </div>
 
-      {/* Progress bar */}
-      <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2">
-        <div
-          className="h-1 w-48 rounded-full overflow-hidden"
-          style={{ background: 'rgba(100, 20, 20, 0.5)' }}
-        >
-          <div
-            className="h-full rounded-full transition-all duration-100"
-            style={{
-              width: `${progress}%`,
-              background: rangeHot
-                ? 'linear-gradient(90deg, #22c55e, #4ade80)'
-                : 'linear-gradient(90deg, #dc2626, #ef4444)',
-              boxShadow: rangeHot
-                ? '0 0 10px rgba(50, 255, 100, 0.8)'
-                : '0 0 10px rgba(255, 50, 50, 0.8)',
-            }}
-          />
-        </div>
-      </div>
     </div>
   );
 }

@@ -55,7 +55,7 @@ export function ModeSelector({ selectedMode, onSelectMode, onStart }: ModeSelect
             <span className="text-white">ZER</span>
             <CrosshairIcon size={36} className="inline-block mx-0.5 md:mx-1 md:w-[60px] md:h-[60px]" />
             <span className="text-white">ED</span>
-            <span className="text-red-500" style={{ textShadow: '0 0 30px rgba(255, 60, 60, 0.8), 0 0 60px rgba(255, 40, 40, 0.5)' }}>IN</span>
+            <span className="text-red-500" style={{ textShadow: '0 0 10px rgba(255, 60, 60, 0.8), 0 0 0px rgba(255, 40, 40, 0.5)' }}>IN</span>
           </h1>
         </div>
         <p className="text-gray-400 text-sm md:text-lg mb-6 md:mb-16" style={{ textShadow: '0 0 20px rgba(150, 30, 30, 0.3)' }}>

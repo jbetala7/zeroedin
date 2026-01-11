@@ -31,22 +31,27 @@ export function CrosshairCalibLoader({ onComplete }: PreloaderProps) {
       const tickProgress = Math.min(prog / 60, 1);
       setTicksVisible(Math.floor(tickProgress * 8));
 
-      // Windage/elevation adjustments (oscillate then settle)
-      const settleProgress = Math.min(prog / 80, 1);
-      const oscillation = Math.sin(prog * 0.2) * (1 - settleProgress);
-      setWindage(oscillation * 10);
-      setElevation(oscillation * 8);
+      // Windage/elevation adjustments (oscillate then settle to 0)
+      // Use damped oscillation that reaches 0 at prog=80
+      const damping = Math.max(0, 1 - prog / 80);
+      const windageVal = Math.sin(prog * 0.25) * damping * 10;
+      const elevationVal = Math.cos(prog * 0.2) * damping * 8;
 
-      // Calibrated at 95%
-      if (prog >= 95 && !isCalibrated) {
+      // Check if values have settled to ~0 (calibration complete)
+      const settled = Math.abs(windageVal) < 0.05 && Math.abs(elevationVal) < 0.05 && prog >= 75;
+
+      if (settled && !isCalibrated) {
         setIsCalibrated(true);
         setWindage(0);
         setElevation(0);
+        // Complete after showing green state
+        setTimeout(onComplete, 600);
+      } else if (!isCalibrated) {
+        setWindage(windageVal);
+        setElevation(elevationVal);
       }
 
-      if (prog >= 100) {
-        setTimeout(onComplete, 500);
-      } else {
+      if (!isCalibrated) {
         requestAnimationFrame(animate);
       }
     };
@@ -228,24 +233,6 @@ export function CrosshairCalibLoader({ onComplete }: PreloaderProps) {
           {isCalibrated ? 'CALIBRATION COMPLETE' : 'CALIBRATING OPTICS...'}
         </div>
 
-        {/* Progress bar */}
-        <div
-          className="mt-4 h-1 w-48 mx-auto rounded-full overflow-hidden"
-          style={{ background: 'rgba(100, 20, 20, 0.5)' }}
-        >
-          <div
-            className="h-full rounded-full transition-all duration-100"
-            style={{
-              width: `${progress}%`,
-              background: isCalibrated
-                ? 'linear-gradient(90deg, #22c55e, #4ade80)'
-                : 'linear-gradient(90deg, #dc2626, #ef4444)',
-              boxShadow: isCalibrated
-                ? '0 0 10px rgba(50, 255, 100, 0.8)'
-                : '0 0 10px rgba(255, 50, 50, 0.8)',
-            }}
-          />
-        </div>
       </div>
 
       {/* CSS for pulse animation */}
