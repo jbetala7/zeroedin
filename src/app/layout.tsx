@@ -1,0 +1,40 @@
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "ZeroedIn | Precision Shooting Range",
+  description: "Experience world-class air rifle training in a state-of-the-art facility. Aim. Focus. Excel.",
+  keywords: ["shooting range", "air rifle", "precision shooting", "target practice", "shooting training"],
+  openGraph: {
+    title: "ZeroedIn | Precision Shooting Range",
+    description: "Experience world-class air rifle training in a state-of-the-art facility.",
+    type: "website",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
+      >
+        {children}
+      </body>
+    </html>
+  );
+}
