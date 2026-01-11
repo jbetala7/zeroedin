@@ -147,7 +147,7 @@ export function AirRiflePumpLoader({ onComplete }: PreloaderProps) {
         <div
           className="relative"
           style={{
-            clipPath: 'polygon(0 0, 42% 0, 42% 100%, 0 100%)',
+            clipPath: 'polygon(0 0, 60% 0, 60% 100%, 0 100%)',
           }}
         >
           <Image
@@ -164,8 +164,8 @@ export function AirRiflePumpLoader({ onComplete }: PreloaderProps) {
         <div
           className="absolute top-0 left-0 w-full"
           style={{
-            clipPath: 'polygon(42% 0, 100% 0, 100% 100%, 42% 100%)',
-            transformOrigin: '42% 50%',
+            clipPath: 'polygon(60% 0, 100% 0, 100% 100%, 60% 100%)',
+            transformOrigin: '60% 50%',
             transform: `rotate(${barrelAngle}deg)`,
           }}
         >

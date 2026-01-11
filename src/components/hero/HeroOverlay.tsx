@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
+import { CrosshairIcon } from '@/components/ui/CrosshairIcon';
 
 interface HeroOverlayProps {
   scrollProgress: number;
@@ -19,8 +20,10 @@ export default function HeroOverlay({ scrollProgress }: HeroOverlayProps) {
         transition={{ delay: 0.5, duration: 0.8 }}
         className="w-full flex justify-between items-center pointer-events-auto"
       >
-        <div className="text-2xl font-bold tracking-wider">
-          <span className="text-orange-500 drop-shadow-[0_0_10px_rgba(255,77,0,0.5)]">ZEROED</span>
+        <div className="text-2xl font-bold tracking-wider flex items-center">
+          <span className="text-orange-500 drop-shadow-[0_0_10px_rgba(255,77,0,0.5)]">ZER</span>
+          <CrosshairIcon size={24} className="inline-block mx-0.5" />
+          <span className="text-orange-500 drop-shadow-[0_0_10px_rgba(255,77,0,0.5)]">ED</span>
           <span className="text-white">IN</span>
         </div>
         <div className="hidden md:flex gap-8 text-sm tracking-wide">

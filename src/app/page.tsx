@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import { useScrollProgress } from '@/hooks/useScrollProgress';
 import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider';
 import HeroOverlay from '@/components/hero/HeroOverlay';
+import { CrosshairIcon } from '@/components/ui/CrosshairIcon';
 
 // Dynamic import for particle components (client-side only)
 const ParticleHero = dynamic(() => import('@/components/hero/ParticleHero'), {
@@ -80,8 +81,10 @@ export default function Home() {
         {/* Footer */}
         <footer className="relative z-10 bg-[#0A0A0F] border-t border-white/10 py-12 px-6">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="text-2xl font-bold tracking-wider">
-              <span className="text-orange-500">ZEROED</span>
+            <div className="text-2xl font-bold tracking-wider flex items-center">
+              <span className="text-orange-500">ZER</span>
+              <CrosshairIcon size={24} className="inline-block mx-0.5" />
+              <span className="text-orange-500">ED</span>
               <span className="text-white">IN</span>
             </div>
             <p className="text-white/30 text-sm">
